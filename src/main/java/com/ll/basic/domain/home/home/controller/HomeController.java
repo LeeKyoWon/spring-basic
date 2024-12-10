@@ -22,4 +22,10 @@ public class HomeController {
         return "저는 홍길동입니다.";
     }
 
+    // Controller 객체의 싱글톤 여부 확인
+    @GetMapping("/getAge")
+    @ResponseBody
+    public int getAgeAndUp() {
+        return age++;
+    }
 }
