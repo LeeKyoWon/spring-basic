@@ -101,12 +101,29 @@ public class HomeController {
         return Article.builder().title("홍길동전").body("홍길동").build();
     }
 
+    @GetMapping("/articleList")
+    @ResponseBody
+    public List<Article> getArticleList() {
+        return List.of(Article.builder().title("제목1").body("내용1").build(),
+                Article.builder().title("제목2").body("내용2").build());
+    }
+
+    @GetMapping("/articleMap")
+    @ResponseBody
+    public Map<String, Article> getArticleMap() {
+        return Map.of("article1", Article.builder().title("제목1").body("내용1").build(),
+                "article2", Article.builder().title("제목2").body("내용2").build());
+    }
+
 }
 
-// AllArgsConstructor -> 모든 필드를 활용
-// RequiredArgsConstructor -> 초기화 되지 않은 final 필드만 활용
-// Builder -> 순서 상관 X
-// Builder 에서 필드의 디폴트값 살리려면 @Builder.Default 적용
+/*
+    AllArgsConstructor -> 모든 필드를 활용
+    RequiredArgsConstructor -> 초기화 되지 않은 final 필드만 활용
+    Builder -> 순서 상관 X
+    Builder 에서 필드의 디폴트값 살리려면 @Builder.Default 적용
+    build 할 때 특정 필드 초기화 빼먹으면 디폴트 값 들어감 -> 0, false, null 등
+ */
 @Getter
 @Builder
 class Article {
@@ -114,6 +131,7 @@ class Article {
     private final long id = 1;
     private final String title;
     private final String body;
+    private final boolean age;
     @Builder.Default
     private final boolean isPublished = true; // boolean의 getter는 isXXX()
 }
