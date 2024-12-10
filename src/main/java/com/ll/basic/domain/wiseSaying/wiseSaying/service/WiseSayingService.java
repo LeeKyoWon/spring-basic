@@ -1,8 +1,12 @@
 package com.ll.basic.domain.wiseSaying.wiseSaying.service;
 import com.ll.basic.domain.wiseSaying.wiseSaying.entity.WiseSaying;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+@Service
 public class WiseSayingService {
     private final List<WiseSaying> wiseSayings;
     private long lastId;
