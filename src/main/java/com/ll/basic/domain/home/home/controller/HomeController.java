@@ -1,5 +1,7 @@
 package com.ll.basic.domain.home.home.controller;
 
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -92,4 +94,26 @@ public class HomeController {
     public Map<String, String> getMap() {
         return Map.of("name", "Paul", "hobby", "reading");
     }
+
+    @GetMapping("/article")
+    @ResponseBody
+    public Article getArticle() {
+        return Article.builder().title("홍길동전").body("홍길동").build();
+    }
+
+}
+
+// AllArgsConstructor -> 모든 필드를 활용
+// RequiredArgsConstructor -> 초기화 되지 않은 final 필드만 활용
+// Builder -> 순서 상관 X
+// Builder 에서 필드의 디폴트값 살리려면 @Builder.Default 적용
+@Getter
+@Builder
+class Article {
+    @Builder.Default
+    private final long id = 1;
+    private final String title;
+    private final String body;
+    @Builder.Default
+    private final boolean isPublished = true; // boolean의 getter는 isXXX()
 }
